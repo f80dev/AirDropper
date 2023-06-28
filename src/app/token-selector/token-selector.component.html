@@ -1,0 +1,31 @@
+<div *ngIf="sel_token.id==''" class="expansion-content-left" >
+    <app-hourglass [message]="message"></app-hourglass><br>
+    <div class="expansion-content-left" style="align-items: flex-start;">
+        <app-input [value]="filter" label="filtre" [showClear]="false"
+                   style="margin-right: 8px;width:25%;" (focusout)="refresh()"
+                   (valueChange)="filter=$event;" (validate)="refresh()">
+        </app-input>
+
+
+            <app-input [options]="tokens" [label]="label" [multiselect]="false"
+                       value_type="listimages" height="250px" [size_image]="size"
+                       (valueChange)="update_sel($event)">
+            </app-input>
+
+
+    </div>
+
+    <div *ngIf="show_detail && sel_token" class="expansion-content-left">
+        <img style="width: 50px" [src]="sel_token.image">
+        <span style="margin-left: 5px">{{sel_token.description}}</span>
+    </div>
+</div>
+
+<div *ngIf="sel_token?.id?.length>0" class="mat-elevation-z2" style="padding: 8px;text-align: left;" >
+    <div class="mat-caption" style="opacity: 0.8;margin: 5px;">{{label}}</div>
+    <div class="expansion-content-left">
+        <img [src]="sel_token.image" style="width: 40px;margin-right: 10px;">
+        <span [title]="sel_token.id">{{sel_token.name}}</span>
+        <mat-icon style="margin-left:10px" (click)="reset()">refresh</mat-icon>
+    </div>
+</div>

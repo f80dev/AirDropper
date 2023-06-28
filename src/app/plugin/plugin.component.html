@@ -1,0 +1,110 @@
+<app-splash
+		[appname]="appname"
+		[duration]="2000"
+		[image]="visual"
+		[description]="claim"></app-splash>
+
+
+<div class="background-form" [style.background-image]="'url('+background+')'">
+	<div class="popup-form background-component mat-elevation-z18" style="min-width: 400px;min-height: 96vh;margin:10px;padding: 10px;" >
+		<div class="titleform" *ngIf="appname">{{appname || ""}}</div>
+		<div *ngIf="code_to_insert==''" style="max-width: 550px;">
+			<app-input label="Wallet de distribution" style="width: 80%;"
+			           [value]="airdrop.dealer_wallet" (valueChange)="airdrop.dealer_wallet=$event" value_type="text">
+			</app-input>
+			<!--        <app-selkey network="elrond-devnet" (onChange)="airdrop.dealer_wallet=$event.encrypt"></app-selkey>-->
+
+			<app-input label="Blockchain / Réseau" [options]="networks" value_type="list"
+			           [value]="airdrop.network" (valueChange)="airdrop.network"></app-input>
+
+			<br>
+			<app-token-selector label="Monnaie à distribuer"
+			                    [filter]="address"
+			                    [network]="airdrop.network.value" [show_detail]="false"
+			                    (valueChange)="airdrop.token=$event"></app-token-selector>
+			<br>
+			<div class="mat-headline-6">Quotas</div>
+			<div style="display: inline-flex;width:100%;">
+				<app-input label="Montant a chanque visite" width="250px"
+				           [value]="airdrop.amount" (valueChange)="airdrop.amount=$event"
+				           value_type="number"
+				></app-input>
+
+				<app-input label="Montant max par jour" width="250px"
+				           [value]="airdrop.limit_by_day" (valueChange)="airdrop.limit_by_day=$event"
+				           value_type="number"
+				></app-input>
+
+
+
+			</div>
+			<br>
+			<app-input label="Pourcentage de chance de gagner"
+			           [value]="airdrop.random" [min]="1" [max]="100" value_type="slide"
+			           (valueChange)="airdrop.random=$event">
+			</app-input>
+
+			<br>
+			<app-input label="Delai avant authentification (secondes)"
+			           [value]="airdrop.authent_delay" [min]="0" [max]="60" value_type="slide"
+			           (valueChange)="airdrop.authent_delay=$event">
+			</app-input>
+
+
+
+			<app-input label="Date de fin" value_type="text"
+			           [value]="airdrop.dtEnd" (valueChange)="airdrop.dtEnd=$event"></app-input>
+
+			<button mat-raised-button
+			        [disabled]="airdrop.dealer_wallet=='' || airdrop.token=={}"
+			        (click)="save_airdrop()">Valider</button>
+
+		</div>
+
+		<mat-tab-group *ngIf="code_to_insert!=''" style="text-align: center;width:450px;">
+
+			<mat-tab label="Code HTML">
+				<div style="width:80%px;display: inline-block;margin:30px;">
+					Insérer le code suivant dans votre page pour
+					que chaque visiteur recoive {{airdrop.amount}} {{airdrop.token.name}}
+					dans la limite de {{airdrop.limit_by_day}} par jour
+				</div>
+				<br>
+
+				<div class="mat-elevation-z4 mat-body-2"  [cdkCopyToClipboard]="code_to_insert"
+				     style="cursor: copy;padding:15px;max-width: 550px;display: inline-block;margin: 30px;text-align: left;opacity: 0.7;;overflow: hidden;">
+					{{code_to_insert}}
+				</div>
+			</mat-tab>
+
+			<mat-tab label="Lien à insérer">
+				<div style="width:80%;display: inline-block;margin:30px;">
+					Partager le lien suivant pour permettre à celui qui l'ouvre
+					de recevoir {{airdrop.amount}} {{airdrop.token.name}}
+					dans la limite de {{airdrop.limit_by_day}} par jour
+				</div>
+				<br>
+
+				<button mat-raised-button (click)="share_url()">Partager</button>
+				<button mat-raised-button (click)="open_test()">Tester</button>
+
+				<br><br>
+					<app-genlink [properties]="link_properties" [show_command_panel]="false"
+					             (update)="update_properties($event)"></app-genlink>
+
+
+			</mat-tab>
+
+			<mat-tab label="Code Angular">
+
+			</mat-tab>
+
+		</mat-tab-group>
+
+		<br>
+		<button mat-raised-button *ngIf="code_to_insert!=''"
+		        (click)="restart()">Insérer une autre balise</button>
+
+
+	</div>
+</div>
