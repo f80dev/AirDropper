@@ -6,58 +6,116 @@
 
 
 <div class="background-form" [style.background-image]="'url('+background+')'">
-	<div class="popup-form background-component mat-elevation-z18" style="min-width: 400px;min-height: 96vh;margin:10px;padding: 10px;" >
+	<div class="popup-form background-component mat-elevation-z18" style="max-width:400px;width:100%;min-height: 96vh;margin:0;padding: 10px;" >
+
+		<mat-icon style="color:lightgray;display: block;position: absolute;right:10px;top:5px;opacity: 0.5;cursor: pointer;z-index: 10;"
+		          title="Passer en mode avancé pour accèder à des options supplémentaire"
+		          (click)="switch_mode()">
+			person_add
+		</mat-icon>
+
 		<div class="titleform" *ngIf="appname">{{appname || ""}}</div>
-		<div *ngIf="code_to_insert==''" style="max-width: 550px;">
-			<app-input label="Wallet de distribution" style="width: 80%;"
-			           [value]="airdrop.dealer_wallet" (valueChange)="airdrop.dealer_wallet=$event" value_type="text">
-			</app-input>
-			<!--        <app-selkey network="elrond-devnet" (onChange)="airdrop.dealer_wallet=$event.encrypt"></app-selkey>-->
 
-			<app-input label="Blockchain / Réseau" [options]="networks" value_type="list"
-			           [value]="airdrop.network" (valueChange)="airdrop.network"></app-input>
+		<app-tuto label="L'application utilise la clé privé d'un wallet pour distribuer les gains.
+		 Vous pouvez utilisez un wallet dédié à cet usage (conseiller) ou fournir la clé privée d'un wallet existant (qui sera cryptée avant usage)"></app-tuto>
 
-			<br>
-			<app-token-selector label="Monnaie à distribuer"
-			                    [filter]="address"
-			                    [network]="airdrop.network.value" [show_detail]="false"
-			                    (valueChange)="airdrop.token=$event"></app-token-selector>
-			<br>
-			<div class="mat-headline-6">Quotas</div>
-			<div style="display: inline-flex;width:100%;">
-				<app-input label="Montant a chanque visite" width="250px"
-				           [value]="airdrop.amount" (valueChange)="airdrop.amount=$event"
-				           value_type="number"
-				></app-input>
+		<div *ngIf="code_to_insert==''" style="width: 100%;text-align: left;">
+			<div class="expansion-content-left">
+				<app-input label="Wallet crypté" width="270px"
+				           title="Ce wallet contient la somme à distribuer"
+				           [value]="airdrop.dealer_wallet" (valueChange)="airdrop.dealer_wallet=$event" value_type="text">
+				</app-input>
 
-				<app-input label="Montant max par jour" width="250px"
-				           [value]="airdrop.limit_by_day" (valueChange)="airdrop.limit_by_day=$event"
-				           value_type="number"
-				></app-input>
+				<button mat-icon-button
+				        [disabled]="airdrop.dealer_wallet!=''"
+				        style="margin-top: -10px;"
+				        title="Créer un wallet pour l'opération"
+				        (click)="create_account()">
+					<mat-icon>add_circle</mat-icon>
+				</button>
 
+				<button mat-icon-button
+				        [disabled]="airdrop.dealer_wallet!=''"
+				        style="margin-top: -10px;"
+				        title="Utiliser un wallet existant"
+				        (click)="encrypt_key()">
+					<mat-icon>key</mat-icon>
+				</button>
 
+				<div *ngIf="qrcode_wallet.length>0" style="width: 100%;text-align: center;margin-bottom:30px;">
+					<div class="mat-body-2">Envoyer le token à distribuer sur votre nouvelle adresse:</div><br>
+					<img [src]="qrcode_wallet" title="Cliquer pour copier l'adresse de réception"
+					     style="width: 150px;margin:10px;cursor: copy;" [cdkCopyToClipboard]="address"><br>
+					<button mat-raised-button (click)="qrcode_wallet=''">Effacer</button>
+					<button mat-raised-button (click)="save_airdrop()">Refresh</button>
+				</div>
 
 			</div>
-			<br>
-			<app-input label="Pourcentage de chance de gagner"
-			           [value]="airdrop.random" [min]="1" [max]="100" value_type="slide"
-			           (valueChange)="airdrop.random=$event">
-			</app-input>
+
+
+
+			<app-input label="Blockchain / Réseau" [options]="networks" value_type="list" width="97%"
+			           [value]="airdrop.network" (valueChange)="update_network($event)"></app-input>
+
+			<div style="width: 95%;margin-left: 15px;">
+				<app-token-selector label="Monnaie à distribuer"
+				                    [filter]="address"
+				                    [network]="airdrop.network.value" [show_detail]="false"
+				                    (valueChange)="airdrop.token=$event"></app-token-selector>
+			</div>
 
 			<br>
-			<app-input label="Delai avant authentification (secondes)"
-			           [value]="airdrop.authent_delay" [min]="0" [max]="60" value_type="slide"
-			           (valueChange)="airdrop.authent_delay=$event">
-			</app-input>
 
 
+			<mat-expansion-panel style="margin-top: 10px;margin-left: -5px;">
+				<mat-expansion-panel-header>Conditions</mat-expansion-panel-header>
+				<div style="display: inline-flex;width:100%;">
+					<app-input label="Montant / visite" width="175px"
+					           [value]="airdrop.amount" (valueChange)="airdrop.amount=$event"
+					           value_type="number"
+					></app-input>
 
-			<app-input label="Date de fin" value_type="text"
-			           [value]="airdrop.dtEnd" (valueChange)="airdrop.dtEnd=$event"></app-input>
+					<app-input label="Maximum / jour" width="175px"
+					           [value]="airdrop.limit_by_day" (valueChange)="airdrop.limit_by_day=$event"
+					           value_type="number"
+					></app-input>
 
-			<button mat-raised-button
-			        [disabled]="airdrop.dealer_wallet=='' || airdrop.token=={}"
-			        (click)="save_airdrop()">Valider</button>
+				</div>
+				<br>
+				<app-input label="Pourcentage de chance de gagner" unity="%"
+				           [value]="airdrop.random" [min]="1" [max]="100" value_type="slide"
+				           (valueChange)="airdrop.random=$event">
+				</app-input>
+
+				<br>
+				<app-input label="Delai avant versement" unity="sec"
+				           help="Si le visiteur quitte trop top la page il n'est pas récompensé"
+				           [value]="airdrop.authent_delay" [min]="0" [max]="60" value_type="slide"
+				           (valueChange)="airdrop.authent_delay=$event">
+				</app-input>
+
+				<app-input label="Informer le visiteur du versement" value_type="boolean"
+				           [value]="airdrop.show_deal" (valueChange)="airdrop.show_deal=$event"></app-input>
+
+				<br>
+				<div class="expansion-content-left" *ngIf="user.advance_mode" style="width: 100%;">
+					<app-input label="Date de début de campagne" value_type="text" width="180px"
+					           [value]="airdrop.dtStart" (valueChange)="airdrop.dtStart=$event"></app-input>
+
+					<app-input label="Date de fin" value_type="text" width="180px"
+					           [value]="airdrop.dtEnd" (valueChange)="airdrop.dtEnd=$event"></app-input>
+
+				</div>
+
+				<div style="width: 100%;text-align: center;margin-top: 50px;">
+					<button mat-raised-button color="primary"
+					        [disabled]="airdrop.dealer_wallet=='' || airdrop.token=={}"
+					        (click)="save_airdrop()">Valider</button>
+
+				</div>
+			</mat-expansion-panel>
+
+
 
 		</div>
 
@@ -103,7 +161,10 @@
 
 		<br>
 		<button mat-raised-button *ngIf="code_to_insert!=''"
-		        (click)="restart()">Insérer une autre balise</button>
+		        (click)="code_to_insert=''">Modifier</button>
+
+		<button mat-raised-button *ngIf="code_to_insert!=''"
+		        (click)="restart()">Nouveau</button>
 
 
 	</div>

@@ -53,15 +53,17 @@ import {MatListModule} from "@angular/material/list";
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { PluginComponent } from './plugin/plugin.component';
 import {GenlinkComponent} from "./genlink/genlink.component";
+import { LoginComponent } from './login/login.component';
+import {TutoComponent} from "./tuto/tuto.component";
 
 const config: SocketIoConfig = { url: environment.server, options: {} };
 
 
 const routes: Routes = [
-  { path: 'about', component: AboutComponent},
-  { path: 'plugin', component: PluginComponent},
-
-  { path: 'admin', component: AdminComponent,pathMatch: 'full' },
+    { path: 'about', component: AboutComponent},
+    { path: 'plugin', component: PluginComponent},
+    { path: 'login', component: LoginComponent},
+    { path: 'admin', component: AdminComponent,pathMatch: 'full' },
     { path: '', component: PluginComponent},
 ]
 
@@ -70,6 +72,7 @@ const routes: Routes = [
       AppComponent,
     AskForPaymentComponent,
     InputComponent,
+      TutoComponent,
     FaqsComponent,
     AuthentComponent,
     AdminComponent,
@@ -87,7 +90,8 @@ const routes: Routes = [
     AutovalidatorComponent,
     TranslatePipe,
     TokenSelectorComponent,
-    PluginComponent
+    PluginComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,

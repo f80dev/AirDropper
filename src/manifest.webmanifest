@@ -8,14 +8,14 @@
   "start_url": "./",
   "icons": [
     {
-      "src": "assets/icons/nflux-64.png",
+      "src": "assets/icons/airdropper-64.png",
       "sizes": "64x64",
       "type": "image/png",
       "purpose": "maskable any"
     },
 
     {
-      "src": "assets/icons/nflux-128.png",
+      "src": "assets/icons/airdropper-128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "maskable any"
@@ -23,13 +23,13 @@
 
 
 {
-      "src": "assets/icons/nflux-256.png",
+      "src": "assets/icons/airdropper-256.png",
       "sizes": "256x256",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/nflux-512.png",
+      "src": "assets/icons/airdropper-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"

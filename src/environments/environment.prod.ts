@@ -21,7 +21,8 @@ export const environment = {
     style:"nfluent-dark.css",
     background:"./assets/wood.jpg",
     logo:"./assets/icons/icon_nfluent_256.png",
-    default_bank:"https://faucet.nfluent.io",
+    default_bank:"https://tokenforge.nfluent.io/bank",
+    histo:"db-server-nfluent",
 
     merchant:{
         id:"BCR2DN4TYD4Z5XCR",

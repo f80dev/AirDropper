@@ -4,8 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --live-reload --port 4200",
+    "start-4201": "ng serve --live-reload --port 4201",
     "build": "ng build",
-    "deploy": "ng build --aot --output-hashing=none --source-map=false --optimization=true --configuration production && gh-pages -d ./dist --repo https://github.com/f80dev/NFTshortener.git -f -t true -b gh-pages -m \"update from gh-pages\"",
+    "deploy": "ng build --aot --output-hashing=none --source-map=false --optimization=true --configuration production && gh-pages -d ./dist --repo https://github.com/f80dev/AirDropper.git -f -t true -b gh-pages -m \"update from gh-pages\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

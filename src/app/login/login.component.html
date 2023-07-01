@@ -1,0 +1,10 @@
+<div style="width: 100%;text-align: center">
+	<app-authent [showExtensionWallet]="true"
+	             [connexion]="authent"
+	             style="max-width: 700px;width: 80%;display: inline-block;"
+	             [showCancel]="true"
+	             (cancel)="cancel()"
+	             (authent)="login($event)"></app-authent>
+
+</div>
+

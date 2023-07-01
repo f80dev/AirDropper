@@ -459,7 +459,7 @@ export class AuthentComponent implements OnInit,OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.network.indexOf("polygon")>-1){
-      this.evmwalletservice.checkWalletConnected().then((accounts)=>{
+      this.evmwalletservice.checkWalletConnected().then((accounts:any[])=>{
         this.address=accounts[0]
         this.strong=true;
       })

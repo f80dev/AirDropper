@@ -60,6 +60,7 @@ export class UserService implements OnDestroy {
   wallet_provider: any;                   //Instance d'acces au wallet distant
   theme_mode: boolean=false;
   target_mint: any;
+  visibleTuto: Boolean | boolean=true;
 
   constructor(
       private httpClient: HttpClient,

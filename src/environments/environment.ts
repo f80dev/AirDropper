@@ -21,7 +21,8 @@ export const environment = {
     style:"nfluent-dark.css",
     background:"./assets/wood.jpg",
     logo:"./assets/icons/icon_nfluent_256.png",
-    default_bank:"http://faucet.nfluent.io",
+    default_bank:"http://localhost:4200/bank",
+    histo:"db-server-nfluent_local",
 
     merchant:{
         id:"BCR2DN4TYD4Z5XCR",
@@ -56,7 +57,8 @@ export const environment = {
             "Créer le lien":"Build the link",
             "Lien pour acquérir un NFT":"Link to buy the required NFT"
         }
-    }
+    },
+
 };
 
 
