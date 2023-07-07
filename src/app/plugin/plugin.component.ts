@@ -143,8 +143,16 @@ export class PluginComponent {
 
     async encrypt_key() {
       let secret_key=await _prompt(this,"La clé privée du wallet de distribution","",this.appname+" à besoin de la clé privée pour pouvoir distribuer les tokens","text","Valider","Annuler",false)
-      this.api.encrypte_key("wallet",this.airdrop.network,secret_key).subscribe((r:any)=>{
-        this.airdrop.dealer_wallet=r.encrypted
-      })
+      if(secret_key){
+        if(secret_key.length<15){
+          this.api._get("keys/"+secret_key+"/").subscribe({
+            next:(key:any)=>{this.airdrop.dealer_wallet=key.encrypted}
+          })
+        }
+      } else {
+        this.api.encrypte_key("wallet",this.airdrop.network,secret_key).subscribe((r:any)=>{
+          this.airdrop.dealer_wallet=r.encrypted
+        })
+      }
     }
 }
