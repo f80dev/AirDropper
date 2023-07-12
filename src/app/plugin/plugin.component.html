@@ -121,8 +121,16 @@
 
 		<mat-tab-group *ngIf="code_to_insert!=''" style="text-align: center;width:450px;">
 
+			<mat-tab label="Affiliation">
+				<app-input label="Votre lien à proposer" [value]="affiliate_url" (valueChange)="affiliate_url=$event"
+						   value_type="text"></app-input>
+				<br>
+
+				<button mat-raised-button (click)="add_affiliate_link()">Ajouter</button>
+			</mat-tab>
+
 			<mat-tab label="Code HTML">
-				<div style="width:80%px;display: inline-block;margin:30px;">
+				<div class="explain-bloc">
 					Insérer le code suivant dans votre page pour
 					que chaque visiteur recoive {{airdrop.amount}} {{airdrop.token.name}}
 					dans la limite de {{airdrop.limit_by_day}} par jour

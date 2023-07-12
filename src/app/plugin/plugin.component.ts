@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {$$, apply_params, getParams, now, setParams, showMessage} from "../../tools";
+import {$$, apply_params, getParams, now, setParams, showError, showMessage} from "../../tools";
 import {NetworkService} from "../network.service";
 import {ActivatedRoute} from "@angular/router";
 import {environment} from "../../environments/environment";
@@ -38,6 +38,7 @@ export class PluginComponent {
   ]
   style_properties: any={}
   qrcode_wallet: string = "";
+  affiliate_url: string = "https://";
 
 
   constructor(
@@ -144,15 +145,32 @@ export class PluginComponent {
     async encrypt_key() {
       let secret_key=await _prompt(this,"La clé privée du wallet de distribution","",this.appname+" à besoin de la clé privée pour pouvoir distribuer les tokens","text","Valider","Annuler",false)
       if(secret_key){
-        if(secret_key.length<15){
-          this.api._get("keys/"+secret_key+"/").subscribe({
-            next:(key:any)=>{this.airdrop.dealer_wallet=key.encrypted}
+        if(secret_key.length<15 && this.airdrop.network.value.indexOf("devnet")>-1){
+          $$("On recherche la clé au pseudo ",secret_key)
+          this.api._get("keys/"+secret_key+"/","network="+this.airdrop.network.value).subscribe({
+            next:(keys:any[])=>{this.airdrop.dealer_wallet=secret_key+": "+keys[0].encrypted,this.address=keys[0].address;},
+            error:(err)=>{debugger;showError(this,err)}
           })
         }
       } else {
-        this.api.encrypte_key("wallet",this.airdrop.network,secret_key).subscribe((r:any)=>{
-          this.airdrop.dealer_wallet=r.encrypted
-        })
+
+        this.api.encrypte_key("wallet",this.airdrop.network,secret_key).subscribe(
+            {
+              next:(code:string)=>{debugger;this.airdrop.dealer_wallet=code},
+              error:(err)=>{debugger;showError(this,err)}
+            }
+            )
       }
     }
+
+  add_affiliate_link() {
+    this.api._post("affiliated_links/","",{url:this.affiliate_url}).subscribe({
+      next:()=>{
+        showMessage(this,"Votre lien est enregistré")
+      },
+      error:(err)=>{
+        showError(this,err)
+      }
+    })
+  }
 }
