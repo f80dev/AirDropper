@@ -1,0 +1,15 @@
+<div class="mainform">
+    <app-input value_type="text" [value]="address" (valueChange)="address=$event;eval_link()"
+                label="Adresse du wallet de reception"></app-input>
+
+    <br>
+    <app-input [options]="urls" value_type="list"
+               [value]="sel_url" (valueChange)="sel_url=$event;eval_link()"
+               label="Sélectionner une url à proposer"></app-input>
+
+    <br>
+    <div class="mat-headline-6">
+        {{url}}
+    </div>
+
+</div>

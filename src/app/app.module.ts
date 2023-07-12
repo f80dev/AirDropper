@@ -55,12 +55,14 @@ import { PluginComponent } from './plugin/plugin.component';
 import {GenlinkComponent} from "./genlink/genlink.component";
 import { LoginComponent } from './login/login.component';
 import {TutoComponent} from "./tuto/tuto.component";
+import { AffiliatedLinksComponent } from './affiliated-links/affiliated-links.component';
 
 const config: SocketIoConfig = { url: environment.server, options: {} };
 
 
 const routes: Routes = [
     { path: 'about', component: AboutComponent},
+    { path: 'links', component: AffiliatedLinksComponent},
     { path: 'plugin', component: PluginComponent},
     { path: 'login', component: LoginComponent},
     { path: 'admin', component: AdminComponent,pathMatch: 'full' },
@@ -91,7 +93,8 @@ const routes: Routes = [
     TranslatePipe,
     TokenSelectorComponent,
     PluginComponent,
-    LoginComponent
+    LoginComponent,
+    AffiliatedLinksComponent
   ],
     imports: [
         BrowserModule,
