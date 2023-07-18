@@ -15,7 +15,12 @@ import { SplashComponent } from './splash/splash.component';
 import { ScannerComponent } from './scanner/scanner.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ClipboardModule} from "@angular/cdk/clipboard";
-import {GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from "@abacritt/angularx-social-login";
+import {
+    GoogleLoginProvider,
+    GoogleSigninButtonModule,
+    SocialAuthServiceConfig,
+    SocialLoginModule
+} from "@abacritt/angularx-social-login";
 import {MatCardModule} from "@angular/material/card";
 import { MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
@@ -56,6 +61,8 @@ import {GenlinkComponent} from "./genlink/genlink.component";
 import { LoginComponent } from './login/login.component';
 import {TutoComponent} from "./tuto/tuto.component";
 import { AffiliatedLinksComponent } from './affiliated-links/affiliated-links.component';
+import {LinkComponent} from "./link/link.component";
+import {FilterPipe} from "./filter.pipe";
 
 const config: SocketIoConfig = { url: environment.server, options: {} };
 
@@ -70,32 +77,34 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [
-      AppComponent,
-    AskForPaymentComponent,
-    InputComponent,
-      TutoComponent,
-    FaqsComponent,
-    AuthentComponent,
-    AdminComponent,
-    PromptComponent,
-      GenlinkComponent,
-    PaymentComponent,
-    FileDragNDropDirective,
-    SignatureComponent,
-    HourglassComponent,
-    UploadFileComponent,
-    SplashComponent,
-    ScannerComponent,
-    SafePipe,
-    AboutComponent,
-    AutovalidatorComponent,
-    TranslatePipe,
-    TokenSelectorComponent,
-    PluginComponent,
-    LoginComponent,
-    AffiliatedLinksComponent
-  ],
+    declarations: [
+        AppComponent,
+        AskForPaymentComponent,
+        InputComponent,
+        TutoComponent,
+        FaqsComponent,
+        AuthentComponent,
+        AdminComponent,
+        PromptComponent,
+        GenlinkComponent,
+        PaymentComponent,
+        FileDragNDropDirective,
+        SignatureComponent,
+        HourglassComponent,
+        UploadFileComponent,
+        SplashComponent,
+        ScannerComponent,
+        SafePipe,
+        FilterPipe,
+        AboutComponent,
+        AutovalidatorComponent,
+        TranslatePipe,
+        TokenSelectorComponent,
+        PluginComponent,
+        LoginComponent,
+        AffiliatedLinksComponent,
+        LinkComponent
+    ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
@@ -135,6 +144,7 @@ const routes: Routes = [
         MatSlideToggleModule,
         MatTabsModule,
         MatListModule,
+        GoogleSigninButtonModule,
     ],
   providers: [
     DeviceService,StyleManagerService,

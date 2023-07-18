@@ -10,6 +10,7 @@ import {getParams} from "../../tools";
 })
 export class LoginComponent implements AfterViewInit {
     authent: Connexion={
+        keystore: false,
         address: false,
         direct_connect: false,
         email: true,

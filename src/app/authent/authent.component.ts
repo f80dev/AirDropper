@@ -16,6 +16,7 @@ import { ExtensionProvider } from "@multiversx/sdk-extension-provider";
 import {WALLET_PROVIDER_DEVNET, WALLET_PROVIDER_MAINNET, WalletProvider} from "@multiversx/sdk-web-wallet-provider/out";
 import {Socket} from "ngx-socket-io";
 import {EvmWalletServiceService} from "../evm-wallet-service.service";
+import {_prompt} from "../prompt/prompt.component";
 
 //Installation de @multiversx/sdk-wallet-connect-provider via yarn add @multiversx/sdk-wallet-connect-provider
 
@@ -59,6 +60,7 @@ export class AuthentComponent implements OnInit,OnChanges {
   @Input() showNetwork=false;
   @Input() showPrivateKey=false;
   @Input() showEmail=false;             //Code d'accès envoyé par email
+  @Input() showKeystore=false;             //Code d'accès envoyé par email
   @Input() showNfluentWalletConnect=false;
   @Input() address: string="";
   @Input() nfluent_server: string=environment.server;
@@ -81,8 +83,6 @@ export class AuthentComponent implements OnInit,OnChanges {
   relayUrl:string = "wss://relay.walletconnect.com";
   qrcode_enabled: boolean = true;
   url_xportal_direct_connect: string="";
-  web3Provider: any;
-
 
   constructor(
       public api:NetworkService,
@@ -172,9 +172,12 @@ export class AuthentComponent implements OnInit,OnChanges {
       this.showWebWallet=this.showWalletConnect
       this.showExtensionWallet=this.showWalletConnect
 
+      this.showKeystore=this.connexion.keystore
       this.showGoogle = this.connexion.google
       this.showWebcam = this.connexion.webcam
       this.showAddress = this.connexion.address
+      this.showEmail=this.connexion.email
+
       this.showNfluentWalletConnect = this.connexion.nfluent_wallet_connect
     }
 
@@ -277,6 +280,7 @@ export class AuthentComponent implements OnInit,OnChanges {
 
 
   connect(network: string) {
+    debugger
     if(network=="elrond"){
       // @ts-ignore
       open(this.network.url_wallet(),"walletElrond")
@@ -314,6 +318,7 @@ export class AuthentComponent implements OnInit,OnChanges {
 
     if(network=="code"){
       if(this.access_code && this.access_code.length==8){
+        debugger
         this.api.access_code_checking(this.access_code,this.address).subscribe(()=>{
           this.strong_connect();
         },(err:any)=>{
@@ -322,8 +327,8 @@ export class AuthentComponent implements OnInit,OnChanges {
       }
     }
 
-    if(network=="private_key" && this.access_code.split(" ").length>=12){
-      this.api.check_private_key(this.private_key,this.address).subscribe(()=>{
+    if(network=="private_key" && this.private_key.split(" ").length>=12){
+      this.api.check_private_key(this.private_key,this.address,this.network).subscribe(()=>{
         this.strong_connect();
       },()=>{
         showMessage(this,'Phrase incorrecte');
@@ -469,5 +474,12 @@ export class AuthentComponent implements OnInit,OnChanges {
       if(this.network.indexOf("elrond")>-1)this.open_wallet_connect();
 
     }
+  }
+
+  async upload_keystore($event: any) {
+    let password=await _prompt(this,"Mot de passe du keystore","","","text","ok","annuler",false)
+    this.api.encrypte_key("",this.network,"","",$event.file,password).subscribe({
+      next:(r:any)=>{this.strong=true;this.address=r.address;this.success();}
+    })
   }
 }

@@ -13,10 +13,11 @@ export const environment = {
     appname:"AirDropper",
     networks:"elrond-devnet,elrond-mainnet",
     visual:"./assets/coffre.jpg",
-    claim:"Valoriser vos contenus en quelques clics",
+    claim:"Récompenser votre communauté dans la monnaie de votre choix",
 
     appli:"http://localhost:4200",
     server:"http://127.0.0.1:4242",
+    redirect_server:"http://localhost:4202",
     website:"https://nfluent.io",
     style:"nfluent-dark.css",
     background:"./assets/wood.jpg",

@@ -1,14 +1,13 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Router} from "@angular/router";
 import {hashCode} from "../../tools";
-import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-tuto',
   templateUrl: './tuto.component.html',
-  styleUrls: ['./tuto.component.sass']
+  styleUrls: ['./tuto.component.css']
 })
-export class TutoComponent implements OnChanges {
+export class TutoComponent implements OnInit,OnChanges {
 
   @Input("text") text: string="";
   @Input("text-align") text_align: string="center";
@@ -24,7 +23,7 @@ export class TutoComponent implements OnChanges {
   @Input("background-color") bkColor="black";
   @Input('if') _if=true;
   @Input('fullscreen') fullscreen=true;
-  @Input('image') image: string="./assets/img/tips.png";
+  @Input('image') image: string="./assets/tips.png";
   @Input('main_button') labelButton: string="Continuez";
   @Input('icon') icon:string="";
   @Input('color') color:string="white";
@@ -34,9 +33,9 @@ export class TutoComponent implements OnChanges {
   @Input('height') height:string="auto";
   @Output('click') onclick: EventEmitter<any>=new EventEmitter();
   @Output('close') onclose: EventEmitter<any>=new EventEmitter();
+  visibleTuto: boolean=true
 
-  constructor(public user:UserService,
-              public router:Router) {}
+  constructor(public router:Router) {}
 
   handle:any;
   code:string="";
@@ -64,10 +63,9 @@ export class TutoComponent implements OnChanges {
 
     if(!this.fullscreen)this._position="relative";
 
-
-    if(!this.user.visibleTuto || this._type=="title" || this.force ){
+    if(this._type=="title" || this.force ){
       if(this._if){
-        this.user.visibleTuto=true;
+        this.visibleTuto=true;
         this.handle=setTimeout(()=>{
           this.hideTuto(true);
         },3000+this.duration*1000);
@@ -97,7 +95,7 @@ export class TutoComponent implements OnChanges {
     } //Marque l'affichage
     this.text="";
     this._if=false;
-    this.user.visibleTuto=false;
+    this.visibleTuto=false;
     this.title="";
     this.subtitle="";
     this.onclose.emit();
@@ -105,8 +103,11 @@ export class TutoComponent implements OnChanges {
   }
 
 
+  ngOnInit(): void {
+
+  }
+
   showText(b: boolean) {
     this._if=b;
-    this.ngOnChanges({})
   }
 }

@@ -16,6 +16,7 @@ export const environment = {
     claim:"Valoriser vos contenus en quelques clics",
 
     server:"https://api.nfluent.io:4242",
+    redirect_server:"https://s.f80.fr",
     appli:"https://s.f80.fr",
     website:"https://nfluent.io",
     style:"nfluent-dark.css",

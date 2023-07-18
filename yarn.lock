@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@abacritt/angularx-social-login@1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@abacritt/angularx-social-login/-/angularx-social-login-1.2.5.tgz#9b1a725ec3a271a6798d80940001a03f085ccbda"
-  integrity sha512-IYkQnNLmEQ/2Uxwiend/t7F8/ySHCcWPOyOWb64AVDt3iOX4xUDHTZxH/3bf+T/6J5bpKEawD/oTzMzvl6aEVw==
+"@abacritt/angularx-social-login@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@abacritt/angularx-social-login/-/angularx-social-login-2.1.0.tgz#b6642b17e013aebec58f53f158f56dd5babaddf4"
+  integrity sha512-wjKiwLhA0j/exrb17unRveAkjxYTf1qRYKXZqJfD4jSzHkODKjVpOVDmt7Q+T2m8fLJBGc304hRBuUVVEtl8xg==
   dependencies:
-    tslib ">=2.3.1"
+    tslib ">=2.5.0"
 
 "@ampproject/remapping@2.2.1", "@ampproject/remapping@^2.2.0":
   version "2.2.1"
@@ -7750,7 +7750,7 @@ tslib@2.5.3:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.5.3.tgz#24944ba2d990940e6e982c4bea147aba80209913"
   integrity sha512-mSxlJJwl3BMEQCUNnxXBU9jP4JBktcEGhURcPR6VQVlnP0FdDEsIaz0C35dXNGLyRfrATNofF0F5p2KPxQgB+w==
 
-tslib@>=2.3.1, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1:
+tslib@>=2.5.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
   integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==

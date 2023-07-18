@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NetworkService} from "../network.service";
-import {encrypt} from "../../tools";
+import {encrypt, showError} from "../../tools";
 
 @Component({
   selector: 'app-affiliated-links',
@@ -10,7 +10,7 @@ import {encrypt} from "../../tools";
 export class AffiliatedLinksComponent implements OnInit {
 
   urls:any[]=[];
-  sel_url: any="";
+  sel_url: any;
   address: string="";
   url:string="";
 
@@ -19,15 +19,17 @@ export class AffiliatedLinksComponent implements OnInit {
 
   ngOnInit(): void {
     this.api._get("affiliated_links/").subscribe({
-      next:(links:string[])=>{
-        this.urls=links.map((x)=>{return {value:x,label:x}})
-        if(this.urls.length>0)this.sel_url=this.urls[0];
-      }
+      next:(links:any[])=>{this.urls=links;},
+      error:(err)=>{showError(this,err)}
     })
   }
 
 
   eval_link() {
-    this.url=this.sel_url+"&wallet="+encrypt(this.address);
+    this.url=this.sel_url.value+"&wallet="+encrypt(this.address);
+  }
+
+  cancel() {
+    this.address="";
   }
 }

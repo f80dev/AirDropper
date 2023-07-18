@@ -1,6 +1,7 @@
 xcopy /f /y ..\NFTCalvi\src\app\authent\*.* src\app\authent\
 xcopy /f /y ..\NFTCalvi\src\app\splash\*.* src\app\splash\
 xcopy /f /y ..\NFTCalvi\src\app\input\*.* src\app\input\
+xcopy /f /y ..\NFTCalvi\src\app\tuto\*.* src\app\tuto\
 xcopy /f /y ..\NFTCalvi\src\app\signature\*.* src\app\signature\
 xcopy /f /y ..\NFTCalvi\src\app\payment\*.* src\app\payment\
 xcopy /f /y ..\NFTCalvi\src\app\autovalidator\*.* src\app\autovalidator\
@@ -13,8 +14,10 @@ xcopy /f /y ..\NFTCalvi\src\app\reversebloc\*.* src\app\reversebloc\
 xcopy /f /y ..\NFTCalvi\src\app\ask-for-payment\*.* src\app\ask-for-payment\
 xcopy /f /y ..\NFTCalvi\src\app\alias.pipe.ts src\app\
 xcopy /f /y ..\NFTCalvi\src\app\splash\*.* src\app\splash\
+xcopy /f /y ..\NFTCalvi\src\app\link\*.* src\app\link\
 xcopy /f /y ..\NFTCalvi\src\app\network.service.ts src\app\
 xcopy /f /y ..\NFTCalvi\src\app\safe.pipe.ts src\app\
+xcopy /f /y ..\NFTCalvi\src\app\filter.pipe.ts src\app\
 xcopy /f /y ..\NFTCalvi\src\app\translate.pipe.ts src\app\
 xcopy /f /y ..\NFTCalvi\src\app\device.service.ts src\app\
 xcopy /f /y ..\NFTCalvi\src\app\file-drag-ndrop.directive.ts src\app\
