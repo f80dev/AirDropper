@@ -15,6 +15,7 @@ export const environment = {
     visual:"./assets/coffre.jpg",
     claim:"Valoriser vos contenus en quelques clics",
 
+    company:"nfluent",
     server:"https://api.nfluent.io:4242",
     redirect_server:"https://s.f80.fr",
     appli:"https://s.f80.fr",

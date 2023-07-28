@@ -1,6 +1,6 @@
 //Test : http://localhost:4200/?wallet=Z0FBQUFBQmtzQ21wT3BtSXo1ODg2QUI4MHZyY3NTeTljRHVzTlJkOG9XbV9DeHpKOU9GY1F0YzRjeTRCVFBPMm5SZzBvUXhTcTF5NDFIMC1BZURvdmxZcXJmTjFOYUxvdFBNX0VMQ1hvVTdlZ1REUFY4UHdKd215XzZucXlrbGFJRllXZXE0UFU4VEc5SDd0WG5pWDdyMUFyLWl3ajlPZTZiZ0VHY0o2V2JtelJ3NTlDVjQ5YmZKZy1NV2R0WFF4V0VmUkRlMzMtWlVrSDYxZ3JnTUhwUXdmcjRaRXRBTzFfV0FtN0Rqc3MzQ3huaWUzenBOY3Y0WWpfSm4tRDQ5TTlDbFhwTVNFMzFVQVRrWmc2WG5qT2ZLRy1xekY0UXpUY3k4aXVJVlViTDRrbHlIeFhFVkM2TDlwVkVLVzB3eDZQUlRhQXM2YktBbnVudElTNExWVS0xVmxvckRMTXp5cFNnM2J3WFlDdXJZRndRSk9EOFphUUU4QlBzWE5oUGtBcGw5ejM5MEVTQmtDdktnWWRsS1FBNmw1MjFzVVhiZHNfZ01RMzFXUWRtbUh0ZFk0X3lKUXRNNC04ckNhbzlGNG9QTHJNaWhKUXQ5Y01ZcUgxN3l5Vm9nWmVOdzJBemFsS21XcmE2Z0doNm1rLVZZX0w1WUdKQ0x1OHkzTlJOWkZwb3ZxY3pEN3JfU0FrMGs3eVlDVWNCWmZSQzJjaTloNlhmR055VmsxbFZlNlg1MEl2cmxLb1p0YXJpZG5WbnpESkFWNzNKQVNPVkZmYm5OT2N4UE5yQWZQVVpia2JJYm5BMXlMTlJVNXFydzFpSWYySXlaN1lFeHhuT2tOWGFlUkJROVVMZmkyWGxVenVVdVdzcG5LelB2dXVhTUZ3RDVLV2c9PQ
 
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {$$, apply_params, getParams, now, setParams, showError, showMessage} from "../../tools";
 import {NetworkService} from "../network.service";
 import {ActivatedRoute} from "@angular/router";
@@ -61,6 +61,7 @@ export class PluginComponent {
   redirect_message="Soyez récompenser en suivant ce lien"
   short_url:string="";
   url_qrcode="";
+
   url_bank: string="https://tokenforge.nfluent.io/bank"
   public_wallets=[
       {label:"bob",value:"bob"},
@@ -129,7 +130,7 @@ export class PluginComponent {
     this.code_to_insert=""
     this.url="";
     this.url_qrcode="";
-    this.url_bank="";
+    this.url_bank="https://tokenforge.nfluent.io/bank";
     this.address="";
   }
 
@@ -153,7 +154,10 @@ export class PluginComponent {
     this.restart()
     let params:any=await getParams(this.routes)
     apply_params(this,params,environment)
-    if(params.wallet)this.airdrop.dealer_wallet=params.wallet
+    if(params.wallet){
+      this.airdrop.dealer_wallet=params.wallet
+      this.network={value:params.network || "elrond-devnet"}
+    }
     if(this.airdrop.dealer_wallet.length>0){
       this.find_address_from_encrypt()
     }else{
@@ -291,7 +295,7 @@ export class PluginComponent {
 
   async keystore_upload($event:any) {
     let password=await _prompt(this,"Mot de passe associé","","","text","Ok","Annuler",false)
-    this.api.encrypte_key("",this.network.value,"","",$event.file,password).subscribe({
+    this.api.encrypte_key("",this.network.value,"","").subscribe({
       next:(r:any)=>{
         this.airdrop.dealer_wallet=r.encrypt
         this.address=r.address;

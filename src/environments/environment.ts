@@ -14,6 +14,7 @@ export const environment = {
     networks:"elrond-devnet,elrond-mainnet",
     visual:"./assets/coffre.jpg",
     claim:"Récompenser votre communauté dans la monnaie de votre choix",
+    company:"nfluent",
 
     appli:"http://localhost:4200",
     server:"http://127.0.0.1:4242",

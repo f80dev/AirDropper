@@ -102,7 +102,9 @@ export class InputComponent implements OnChanges,OnInit {
     if(this.value_type=="list" || this.value_type=="listimages" || this.value_type=="images") {
       if(changes["value"]){
         if(this.value_field==""){
-          this.valueCtrl.setValue(changes["value"].currentValue)
+          let v=changes["value"].currentValue
+          if(typeof(v)=="string")v={label:v,value:v}
+          this.valueCtrl.setValue(v)
         }else{
           for(let o of this.options){
             if(o[this.value_field]==changes["value"].currentValue){
@@ -130,8 +132,6 @@ export class InputComponent implements OnChanges,OnInit {
           }
           this.options.push(option);
         }
-        if (this.options.length == 1)
-          this.sel_change({value: this.options[0]})
       }
     }
   }
@@ -157,6 +157,7 @@ export class InputComponent implements OnChanges,OnInit {
   compareFn(obj1:any,obj2:any){
     let c_obj1=typeof(obj1)=="object" ? JSON.stringify(obj1) : obj1
     let c_obj2=typeof(obj2)=="object" ? JSON.stringify(obj2) : obj2
+    //TODO: faire un tri des propriété par ordre alphabétique pour s'assurrer que {a:1,b:2} est égale à {b:2,a:1}
     return c_obj1===c_obj2
   }
 

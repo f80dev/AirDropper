@@ -28,7 +28,7 @@ import {_prompt} from "../prompt/prompt.component";
 export class AuthentComponent implements OnInit,OnChanges {
 
   @Input() intro_message:string="";
-  @Input() network:string="elrond-devnet";
+  @Input() network:string="";
   @Input() connexion:Connexion | undefined;
 
   @Input() paiement:{address:string, amount:number,description:string} | undefined;
@@ -94,28 +94,8 @@ export class AuthentComponent implements OnInit,OnChanges {
       public toast:MatSnackBar,
       public evmwalletservice:EvmWalletServiceService
   ) {
-
-    if(this.network.indexOf("elrond")>-1){
-      const callbacks:any ={
-        onClientLogin: async ()=> {
-          this.address=await this.provider.getAddress();
-        },
-        onClientLogout: ()=> {},
-      }
-      this.provider = new WalletConnectV2Provider(callbacks, this.get_chain_id(), this.relayUrl, this.walletConnect_ProjectId);
-
-    }
-
-    if(this.network.indexOf("polygon")>-1){
-
-    }
-
-
   }
 
-  async init_wallet_provider(){
-    await this.provider.init();
-  }
 
   private toHex(stringToConvert: string) {
     return stringToConvert
@@ -128,7 +108,7 @@ export class AuthentComponent implements OnInit,OnChanges {
   refresh(){
     $$("Refresh de l'écran");
     if (this.provider) {
-      this.init_wallet_provider().then(()=>{
+      this.provider.init().then(()=>{
         if(this.showWalletConnect && this.directShowQRCode)this.open_wallet_connect()
       });
 
@@ -164,14 +144,27 @@ export class AuthentComponent implements OnInit,OnChanges {
   ngOnInit(): void {
     this.api.server_nfluent=this.nfluent_server;
 
+    if(this.network.indexOf("elrond")>-1){
+      const callbacks:any ={
+        onClientLogin: async ()=> {
+          this.address=await this.provider.getAddress();
+        },
+        onClientLogout: ()=> {},
+      }
+      this.provider = new WalletConnectV2Provider(callbacks, this.get_chain_id(), this.relayUrl, this.walletConnect_ProjectId);
+    }
+
+    if(this.network.indexOf("polygon")>-1){
+    }
+
+
     this.address="";
     if(this.use_cookie)this.address=localStorage.getItem("authent_address") || "";
 
     if(this.connexion){
       this.showWalletConnect=this.connexion.wallet_connect;
-      this.showWebWallet=this.showWalletConnect
-      this.showExtensionWallet=this.showWalletConnect
-
+      this.showWebWallet=this.connexion.web_wallet
+      this.showExtensionWallet=this.connexion.extension_wallet
       this.showKeystore=this.connexion.keystore
       this.showGoogle = this.connexion.google
       this.showWebcam = this.connexion.webcam
@@ -233,6 +226,10 @@ export class AuthentComponent implements OnInit,OnChanges {
     //     }
     //   )
     // } else this.refresh();
+
+    if(this.showWalletConnect && !this.showExtensionWallet && !this.showWebWallet){
+      setTimeout(()=>{this.open_wallet_connect();},500)
+    }
   }
 
 
@@ -478,7 +475,7 @@ export class AuthentComponent implements OnInit,OnChanges {
 
   async upload_keystore($event: any) {
     let password=await _prompt(this,"Mot de passe du keystore","","","text","ok","annuler",false)
-    this.api.encrypte_key("",this.network,"","",$event.file,password).subscribe({
+    this.api.encrypte_key("",this.network,"","").subscribe({
       next:(r:any)=>{this.strong=true;this.address=r.address;this.success();}
     })
   }

@@ -34,7 +34,11 @@
 				           [value]="airdrop.dealer_wallet" (valueChange)="update_dealer_wallet($event)" value_type="text">
 				</app-input>
 
-				<app-link [content]="address" [network]="network.value" *ngIf="address" icon="travel_explore" style="margin-left: 15px;"></app-link>
+				<app-link [content]="address" [network]
+						="network.value"
+						  title="Voir les token"
+						  *ngIf="address" icon="travel_explore" style="margin-left: 15px;">
+				</app-link>
 
 				<div *ngIf="airdrop.dealer_wallet==''" class="expansion-content-left" style="width:350px;">
 					<app-upload-file style="margin-top:-16px;" [zone]="true"
@@ -80,6 +84,7 @@
 				                    [owner]="address"
 				                    [network]="airdrop.network" [show_detail]="false"
 				                    (endSearch)="onEndSearch($event)"
+									(unselect)="airdrop!.token={}"
 				                    (valueChange)="update_token($event);"></app-token-selector>
 			</div>
 
@@ -89,19 +94,19 @@
 
 				<app-input label="Montant versé" width="135px" style="display: inline-block;"
 				           [value]="airdrop.amount" [min]="0" [max]="airdrop.limit_by_day"
-				           [unity]="airdrop.token.name"
+				           [unity]="airdrop.token.name.substring(0,10)"
 				           (valueChange)="airdrop.amount=$event"
 				           value_type="number"></app-input>
 
 				<app-input label="Maximum / jour" width="135px"  style="display: inline-block;"
 				           [value]="airdrop.limit_by_day" [min]="0"
-				           [unity]="airdrop.token.name"
+				           [unity]="airdrop.token.name.substring(0,10)"
 				           (valueChange)="airdrop.limit_by_day=$event"
 				           value_type="number"></app-input>
 
 				<app-input label="Limite par wallet" width="135px"  style="display: inline-block;"
 				           [value]="airdrop.limit_by_wallet" [min]="0"
-				           [unity]="airdrop.token.name"
+				           [unity]="airdrop.token.name.substring(0,10)"
 				           (valueChange)="airdrop.limit_by_wallet=$event"
 				           value_type="number"></app-input>
 			</div>
@@ -186,7 +191,7 @@
 
 					<div class="mat-elevation-z4 mat-body-2"  [cdkCopyToClipboard]="code_to_insert"
 					     title="Cliquer pour copier le contenu"
-					     style="cursor: copy;padding:5px;max-height:30vh;max-width:550px;width:87%;display: inline-block;margin: 10px;text-align: left;opacity: 0.7;overflow: hidden;">
+					     style="cursor: copy;padding:5px;max-height:30vh;max-width:550px;width:87%;display: inline-block;margin: 10px;text-align: left;opacity: 0.4;overflow: hidden;">
 						{{code_to_insert}}
 					</div>
 				</div>
