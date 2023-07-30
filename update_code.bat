@@ -35,3 +35,4 @@ xcopy /f /y ..\NFTCalvi\src\tools.ts src\
 xcopy /f /y ..\NFTCalvi\src\nft.ts src\
 xcopy /f /y ..\NFTCalvi\src\definitions.ts src\
 
+

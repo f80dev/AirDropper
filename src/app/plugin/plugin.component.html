@@ -16,7 +16,7 @@
 
 		<div class="titleform" *ngIf="appname">{{appname || ""}}</div>
 
-		<app-tuto  label="L'application utilise la clé privé d'un wallet pour distribuer les gains.
+		<app-tuto  label="{{appname}} utilise un wallet pour distribuer une monnaie en fonction d'une action de l'utilisateur.
 		 Vous pouvez utilisez un wallet dédié à cet usage (conseiller) ou fournir la clé privée d'un wallet existant (qui sera cryptée avant usage)."></app-tuto>
 
 		<div style="width: 100%;text-align: center;" *ngIf="code_to_insert==''">
@@ -60,7 +60,7 @@
 						<mat-icon>key</mat-icon>
 					</button>
 
-					<app-input label="Wallets public"
+					<app-input label="Wallet public"
 					           *ngIf="airdrop && airdrop.network!.indexOf('devnet')>-1 && airdrop.dealer_wallet==''"
 					           value_type="list" width="140px"
 					           [options]="public_wallets" (valueChange)="set_public_wallet($event)"></app-input>
