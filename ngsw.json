@@ -1,0 +1,117 @@
+{
+  "configVersion": 1,
+  "timestamp": 1695666202418,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/main.js",
+        "/manifest.webmanifest",
+        "/nfluent-dark.css",
+        "/nfluent-mvx.css",
+        "/nfluent-yellow.css",
+        "/nfluent.css",
+        "/polyfills.js",
+        "/runtime.js",
+        "/styles.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/HelveticaInseratLT.ttf",
+        "/assets/coffre.jpg",
+        "/assets/faqs.yaml",
+        "/assets/gift.webp",
+        "/assets/icons/airdropper-128.png",
+        "/assets/icons/airdropper-256.png",
+        "/assets/icons/airdropper-512.png",
+        "/assets/icons/airdropper-64.png",
+        "/assets/logo.png",
+        "/assets/money.webp",
+        "/assets/tips.png",
+        "/assets/webFonts/GilroyRegular/font.woff",
+        "/assets/webFonts/GilroyRegular/font.woff2",
+        "/assets/webFonts/HelveticaInseratLT.ttf",
+        "/assets/webFonts/MyFontsWebfontsKit.css",
+        "/assets/webFonts/Swiss721BlackCondensedBT.ttf",
+        "/assets/webFonts/mediasans.css",
+        "/assets/webFonts/mediasansweb-bold.woff",
+        "/assets/webFonts/mediasansweb-bold.woff2",
+        "/assets/webFonts/mediasansweb-regular.woff",
+        "/assets/webFonts/mediasansweb-regular.woff2",
+        "/assets/wood.jpg"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/HelveticaInseratLT.ttf": "72bdaf283827e7e2c2dfde8c2635fdc1c4500bc3",
+    "/assets/coffre.jpg": "42cdbf77fdaebcb9fbee34d43063a147966beb67",
+    "/assets/faqs.yaml": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    "/assets/gift.webp": "48b08924fa103ba1159f0b1c8b35afe20b16ff27",
+    "/assets/icons/airdropper-128.png": "af38d8b62c25f1606414918aeae7ec39ad69d7b1",
+    "/assets/icons/airdropper-256.png": "5408e3ce22f325090a6e1d7132fd938d7892df5d",
+    "/assets/icons/airdropper-512.png": "b90081176e53879dbe2f0a3e42229f12a6709161",
+    "/assets/icons/airdropper-64.png": "a6b272280cedb20ab420bc2aa39670aeec8b3f0a",
+    "/assets/logo.png": "5408e3ce22f325090a6e1d7132fd938d7892df5d",
+    "/assets/money.webp": "61a18c62c67641efd88471b078cfc1594fa8a136",
+    "/assets/tips.png": "b7832ac8a831f94cd9b656f48bc0d75a5cd587ca",
+    "/assets/webFonts/GilroyRegular/font.woff": "3af221642b4c256268420f0e82583519c21ef868",
+    "/assets/webFonts/GilroyRegular/font.woff2": "b37bd3ed335f0bf8ff29e4176b920a4be1f837b3",
+    "/assets/webFonts/HelveticaInseratLT.ttf": "72bdaf283827e7e2c2dfde8c2635fdc1c4500bc3",
+    "/assets/webFonts/MyFontsWebfontsKit.css": "857bb12ffc5177ebd6284903da805b15d3719c08",
+    "/assets/webFonts/Swiss721BlackCondensedBT.ttf": "2fab61e49e3db6ae73cb7312b6a7b13b8b4dcf59",
+    "/assets/webFonts/mediasans.css": "33546a33fffa6e4a6edc44dccdf29fb0d5e68b06",
+    "/assets/webFonts/mediasansweb-bold.woff": "30897bff3f932629e64a87ae691a2ebe397c92cd",
+    "/assets/webFonts/mediasansweb-bold.woff2": "2b4a1d98540df56d84c02084208fd26068f90de9",
+    "/assets/webFonts/mediasansweb-regular.woff": "c3ed8508e8a3ac5a4bce2c622920964674b9fc7e",
+    "/assets/webFonts/mediasansweb-regular.woff2": "7e99ced9bda11c1e8765ec5907b210c14a84bc06",
+    "/assets/wood.jpg": "35eac92cd829d3d753aff82f55da314ed8b92a34",
+    "/favicon.ico": "11923365f3b7c7a2c4c748669ae3285716f1d5f0",
+    "/index.html": "046fb3330b1b55ebb9540fb8ba378099a3206822",
+    "/main.js": "02024a106ff50fb8d6252f9eca99549ab05e631c",
+    "/manifest.webmanifest": "06c64378cfad560ef95260415827c58ad996704a",
+    "/nfluent-dark.css": "a2ee9d5a53b5fd455c5c768f855d6a0d3b10598e",
+    "/nfluent-mvx.css": "f2e86891b27a4f24f9b86d98a63cb9645be097ed",
+    "/nfluent-yellow.css": "08a14d0f90983c320649ecae548222289c9cf5b1",
+    "/nfluent.css": "1d920b94cfb718a6d734d091fda6e75506332633",
+    "/polyfills.js": "5adeb1e2ea36b8e3181ad677e70d223a6b580189",
+    "/runtime.js": "93e4e98a69dde1b27c951c8dc3e6bf011bef527e",
+    "/styles.css": "430650905f313fddb14df3606c864574fde13e7f"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
